@@ -1,0 +1,26 @@
+<table id="all_users_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Mobile Number</th>
+      <th>Date Joined</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.last_name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.mobile_number }}</td>
+        <td>{{ user.date_joined }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>No users have registered yet!</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

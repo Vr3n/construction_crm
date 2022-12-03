@@ -1,0 +1,27 @@
+<!-- Sweet Alert notification -->
+{% load static %}
+<script src="{% static 'vendors/sweetalert2/sweetalert2.min.js' %}"></script>
+<script>
+  // Display messages from server as status messages.
+  {% if messages %}
+      {% for message in messages %}
+          const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 4000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+          })
+
+          Toast.fire({
+            icon: '{{ message.level_tag|safe }}',
+            title: '{{ message|safe }}'
+          })
+      {% endfor %}
+  {% endif %}
+</script>
+<!-- Sweet Alert notification end -->

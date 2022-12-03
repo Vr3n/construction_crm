@@ -1,0 +1,34 @@
+{% include 'partials/_msg.html' %}
+
+<form action="{% url 'hx_backoffice_user_document_form' object.id %}" enctype="multipart/form-data" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="kyc" value="{{ object.id }}" />
+  <input type="hidden" name="user" value="{{ object.user.id }}" />
+  <div class="form-group">
+    <label for="document_name">Document Type</label>
+    <div>
+      <select id="document_name" required name="document_name" class="custom-select required"
+        aria-describedby="document_nameHelpBlock" required="required">
+        <option selected>Select Document Type</option>
+
+        {% for document in document_names %}
+        <option value="{{document.id}}">{{ document.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div id="document_form_toggle" style="display: none">
+    <div class="form-group">
+      <label for="id_number">Number</label>
+      <input id="id_number" required name="number" placeholder="number" type="text" class="form-control required"
+        aria-describedby="numberHelpBlock" />
+    </div>
+    <div class="form-group">
+      <div class="col-lg-4">
+        <label for="id_document">Document</label>
+        <input type="file" class="form-control" id="id_document" name="document" />
+      </div>
+    </div>
+    <button class="btn btn-success">Submit</button>
+  </div>
+</form>

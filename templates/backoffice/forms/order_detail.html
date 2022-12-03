@@ -1,0 +1,57 @@
+{% extends '../../backoffice_base.html' %}
+
+<!-- -->
+{% block title %}Order Detail{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>Order Detail</h3>
+<br />
+<div class="card">
+  <div class="card-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- Form -->
+      {{ form }}
+      <br />
+      <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>User</th>
+          <th>Stock</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Stop Loss</th>
+          <th>Margin</th>
+          <th>Type</th>
+          <th>Action</th>
+          <th>Status</th>
+          <th>Created On</th>
+          <th>Updated On</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ object.user.get_full_name }}</td>
+          <td>{{ object.stock.code }}</td>
+          <td>{{ object.quantity }}</td>
+          <td>{{ object.price }}</td>
+          <td>{{ object.stop_loss }}</td>
+          <td>{{ object.margin }}</td>
+          <td>{{ object.order_type.name }}</td>
+          <td>{{ object.action.action }}</td>
+          <td>{{ object.status.status }}</td>
+          <td>{{ object.created_on }}</td>
+          <td>{{ object.updated_on }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

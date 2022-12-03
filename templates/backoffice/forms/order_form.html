@@ -1,0 +1,224 @@
+{% extends '../../backoffice_base.html' %}
+<!-- Custom Style -->
+{% block custom_style %}
+<style>
+  .order-card {
+    color: #fff;
+  }
+
+  .bg-c-blue {
+    background: linear-gradient(45deg, #4099ff, #73b4ff);
+  }
+
+  .bg-c-green {
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+  }
+
+  .bg-c-yellow {
+    background: linear-gradient(45deg, #ffb64d, #ffcb80);
+  }
+
+  .bg-c-pink {
+    background: linear-gradient(45deg, #ff5370, #ff869a);
+  }
+
+  .card {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+    border: none;
+    margin-bottom: 30px;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .card .card-block {
+    padding: 25px;
+  }
+
+  .order-card i {
+    font-size: 26px;
+  }
+
+  .f-left {
+    float: left;
+  }
+
+  .f-right {
+    float: right;
+  }
+</style>
+{% endblock custom_style %}
+
+<!-- -->
+{% block title %}Leads{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>Leads</h3>
+<br />
+<!-- Information Cards -->
+<div class="row">
+  <div class="col-md-6 col-xl-6">
+    <div class="card bg-c-yellow order-card">
+      <div class="card-block">
+        <h3 class="m-b-20">Leads Today <span class="f-right">{{ today_lead_count }}</span> </h3>
+        {% comment %} <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-6 col-xl-6">
+    <div class="card bg-c-pink order-card">
+      <div class="card-block">
+        <h3 class="m-b-20">Total Leads <span class="f-right">{{ total_lead_count }}</span> </h3>
+        {% comment %} <p class="m-b-0">Completed Orders<span class="f-right">351</span></p> {% endcomment %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Information Cards -->
+
+<!-- Create Order collapse button -->
+<button
+  class="btn btn-primary"
+  type="button"
+  data-toggle="collapse"
+  data-target="#collapseExample"
+  aria-expanded="false"
+  aria-controls="collapseExample"
+>
+  Create Lead 
+</button>
+<!-- Create Order collapse button -->
+<br />
+
+<!-- Create Order Form -->
+<div class="collapse" id="collapseExample">
+  <div class="card mt-2">
+    <div class="card-body">
+      <form action="" method="post">
+        {% csrf_token %}
+        <!-- Form -->
+        {% comment %} {{ form }} {% endcomment %}
+        {% for hidden in form.hidden_fields %}
+          {{ hidden }}
+        {% endfor %}
+        {% comment %}
+        {% for field in form.visible_fields %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        {% endcomment %}
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lead Personal Details</h5>
+                         <div class="form-group">
+                            <label for="first_name">First Name</label> 
+                            <input id="first_name" name="first_name" value="{% if form.first_name.value != None %}{{ form.first_name.value }}{% endif %}" placeholder="First Name of Lead" type="text" class="form-control" required="required">
+                            {% for error in form.first_name.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                         <div class="form-group">
+                            <label for="last_name">Last Name</label> 
+                            <input id="last_name" name="last_name" value="{{ form.last_name.value|default_if_none:"" }}" placeholder="Last Name of Lead" type="text" class="form-control">
+                            {% for error in form.last_name.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                         <div class="form-group">
+                            <label for="email">Email</label> 
+                            <input id="email" name="email" value="{{ form.email.value|default_if_none:"" }}"  placeholder="Email address of Lead" type="email" class="form-control" required>
+                            {% for error in form.email.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                         <div class="form-group">
+                            <label for="mobile_number">Mobile Number</label> 
+                            <input id="mobile_number" pattern="[0-9]{10}" value="{{ form.mobile_number.value|default_if_none:"" }}" name="mobile_number" placeholder="ten-digit mobile number of lead" type="number" class="form-control" required="required">
+                            {% for error in form.mobile_number.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Manager Details</h5>
+                         <div class="form-group">
+                            <label for="lead_manager">Lead Manager</label> 
+                            <div>
+                              <select id="lead_manager" name="lead_manager" class="custom-select" aria-describedby="lead_managerHelpBlock">
+                                <option value="" selected>Select employee to assign manager</option>
+                                {% for member in members %}
+                                    {% if form.lead_manager.id == member.id %}
+                                        <option value="{{ member.id }}" selected>{{ member.get_full_name }}</option>
+                                    {% else %}
+                                        <option value="{{ member.id }}">{{ member.get_full_name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                              </select> 
+                              <span id="lead_managerHelpBlock" class="form-text text-muted">Assign a member to manage this lead.</span>
+                            </div>
+                         </div>
+                         <div class="form-group">
+                            <label for="lead_source">Source</label> 
+                            <input id="lead_source" value="{{ form.source.value|default_if_none:"" }}" name="source" placeholder="Source from where lead was referred to our company" type="text" class="form-control">
+                            {% for error in form.source.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                         <div class="form-group">
+                            <label for="budget">Budget</label> 
+                            <input id="budget" value="{{ form.budget.value|default_if_none:"" }}" name="budget" placeholder="Budget of the lead" type="text" class="form-control">
+                            {% for error in form.budget.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                         <div class="form-group">
+                            <label for="interested_in">Interested In</label> 
+                            <textarea id="interested_in" name="interested_in" cols="40" rows="5" class="form-control" aria-describedby="interested_inHelpBlock">{{ form.interested_in.value|default_if_none:"" }}</textarea> 
+                            <span id="interested_inHelpBlock" class="form-text text-muted">What's the lead looking to get from company?</span>
+                            {% for error in form.interested_in.errors %}
+                              <span class="help-block text-danger">{{ error }}</span>
+                            {% endfor %}
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <button class="btn btn-success" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Create Order Form -->
+<br />
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-header">All Leads</h4>
+    <br />
+    <div class="table-responsive">
+      {% include 'backoffice/tables/orders/order_table.html' %}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% comment %}
+            {% for error in field.errors %}
+              <span class="help-block">{{ error }}</span>
+            {% endfor %}
+{% endcomment %}

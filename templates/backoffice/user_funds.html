@@ -1,0 +1,24 @@
+{% extends 'backoffice_base.html' %}
+
+<!-- -->
+{% block title %}User Funds{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>User Funds 💰 </h3>
+<hr>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title text-danger">All user funds</h5>
+        <hr>
+        <div class="table-responsive">
+          {% include 'backoffice/tables/users/user_funds.html' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+{% endblock content %}

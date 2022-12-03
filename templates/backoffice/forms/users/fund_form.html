@@ -1,0 +1,171 @@
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="hidden" value="{{object.user.id}}" name="user" />
+
+  <div class="form-row">
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_available_margin">Available Margin</label>
+      <input
+        id="id_available_margin"
+        name="available_margin"
+        placeholder="0.00"
+        {% if object.available_margin %}
+          value="{{object.available_margin}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        aria-describedby="id_available_marginHelpBlock"
+        required="required"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_used_margin">Used Margin</label>
+      <input
+        id="id_used_margin"
+        name="used_margin"
+        placeholder="0.00"
+        {% if object.used_margin %}
+          value="{{object.used_margin}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_delivery_margin">Delivery Margin</label>
+      <input
+        id="id_delivery_margin"
+        name="delivery_margin"
+        placeholder="0.00"
+        {% if object.delivery_margin %}
+          value="{{object.delivery_margin}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <label for="id_available_cash">Available Cash</label>
+      <input
+        id="id_available_cash"
+        name="available_cash"
+        placeholder="0.00"
+        {% if object.available_cash %}
+          value="{{object.available_cash}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-6 col-sm-12">
+      <label for="id_opening_balance">Opening balance</label>
+      <input
+        id="id_opening_balance"
+        name="opening_balance"
+        placeholder="0.00"
+        {% if object.opening_balance %}
+          value="{{object.opening_balance}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 col-sm-12">
+      <label for="id_pay_in">Pay In</label>
+      <input
+        id="id_pay_in"
+        name="pay_in"
+        placeholder="0.00"
+        {% if object.pay_in %}
+          value="{{object.pay_in}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-6 col-sm-12">
+      <label for="id_pay_out">Pay Out</label>
+      <input
+        id="id_pay_out"
+        name="pay_out"
+        placeholder="0.00"
+        type="text"
+        {% if object.pay_out %}
+          value="{{object.pay_out}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        class="form-control decimal"
+      />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_span">Span</label>
+      <input
+        id="id_span"
+        name="span"
+        placeholder="0.00"
+        {% if object.span %}
+          value="{{object.span}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_exposure">Exposure</label>
+      <input
+        id="id_exposure"
+        name="exposure"
+        {% if object.exposure %}
+          value="{{object.exposure}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        placeholder="0.00"
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+    <div class="form-group col-md-4 col-sm-12">
+      <label for="id_options_premium">Options Premium</label>
+      <input
+        id="id_options_premium"
+        name="options_premium"
+        {% if object.options_premium %}
+          value="{{object.options_premium}}"
+        {% else %}
+          value="0.00"
+        {% endif %}
+        placeholder="0.00"
+        type="text"
+        class="form-control decimal"
+      />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>

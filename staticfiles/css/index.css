@@ -1,0 +1,22 @@
+body::-webkit-scrollbar {
+  width: 0.6rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: black;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: green;
+  border-radius: 0.625rem;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: lightgreen;
+}
+
+@supports (scrollbar-color: red blue) {
+  * {
+    scrollbar-color: green black;
+  }
+}

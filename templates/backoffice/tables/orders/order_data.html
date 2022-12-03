@@ -1,0 +1,25 @@
+<tbody id="order_data">
+    {% for order in order_data %}
+    <tr>
+    <td>{{ order.user.get_full_name }}</td>
+    <td>{{ order.stock.code }}</td>
+    <td>{{ order.quantity }}</td>
+    <td>{{ order.price }}</td>
+    <td>{{ order.stop_loss }}</td>
+    <td>{{ order.margin }}</td>
+    <td>{{ order.order_type.name }}</td>
+            <td {% if order.action.action == "BUY" %}class="table-info" {% else %}class="table-warning"{% endif %} >{{ order.action.action }}</td>
+    <td>{{ order.status.status }}</td>
+    <td>{{ order.created_on }}</td>
+    <td>{{ order.updated_on }}</td>
+    <td>
+        <a href="{{ order.get_absolute_url }}" class="btn btn-info"
+        >Update</a
+        >
+    </td>
+    <td>
+        <a hx-post="{{ order.get_delete_url }}" hx-trigger="confirmed" _="on click call Swal.fire({ title: 'Delete {{ order.stock.code }}', text: 'Are you sure you want to delete order?', icon: 'warning',showCancelButton: true, confirmButtonText: 'Delete' }) if result.isConfirmed trigger confirmed" hx-target="#orderDataTable" hx-swap="outerHTML" class="btn btn-danger">Delete</a>
+    </td>
+    </tr>
+    {% endfor %}
+</tbody>

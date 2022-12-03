@@ -1,0 +1,25 @@
+
+{% for notification in notifications %}
+<a class="dropdown-item">
+    <div class="icon">
+        <!-- -->
+        {% if notification.notification_type == "order_notification" %}
+            <i class="mdi mdi-shopping"></i>
+        {% else %}
+            <i class="mdi mdi-bell-ring"></i>
+        {% endif %}
+    </div>
+    <div class="content">
+        <p>{{ notification.msg }}</p>
+        <p class="sub-text text-danger">{{ notification.created_at|date:"d M Y : h:i:s A" }}</p>
+    </div>
+</a>
+{% empty %}
+<div class="icon">
+  <i data-feather="user-plus"></i>
+</div>
+<div class="content">
+  <p>No New Notificaitons</p>
+  <p class="sub-text text-muted">6 hrs ago</p>
+</div>
+{% endfor %}

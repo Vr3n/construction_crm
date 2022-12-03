@@ -1,0 +1,49 @@
+{% extends '../../backoffice_base.html' %}
+<!-- -->
+{% block title %}Order Status{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>Order Status</h3>
+<div class="card">
+  <div class="card-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- Form -->
+      {{ form }}
+      <br />
+      <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th>Status</th>
+            <th>Description</th>
+            {% comment %} <th>Message</th> {% endcomment %}
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in data %}
+          <tr {% if forloop.first %}class="table-primary"{% endif %} >
+            <td>{{ order.status }}</td>
+            <td>{{ order.description|truncatechars:80 }}</td>
+            {% comment %} <td>{{ order.message }}</td> {% endcomment %}
+            <td>
+              <a href="{{ order.get_absolute_url }}" class="btn btn-info"
+                >Update</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

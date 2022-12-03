@@ -1,0 +1,38 @@
+<table id="all_emails_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Verified</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for email in emails %}
+      <tr>
+        <td>{{ email.user.first_name }}</td>
+        <td>{{ email.user.last_name }}</td>
+        <td>{{ email.email }}</td>
+        <td>
+        {% if email.verified %}
+          Verified
+        {% elif email.verified == False %}
+          Unverified
+        {% endif %}
+          </td>
+        <td>
+          {% if email.primary %}
+            Primary
+          {% else %}
+            Secondary
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>No users have registered yet!</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

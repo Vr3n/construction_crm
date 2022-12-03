@@ -1,0 +1,36 @@
+<table id="all_kyc_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>User</th>
+      <th>Is Verified</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in user_kycs %}
+      <tr>
+        <td>{{ item.user.get_full_name }}</td>
+        <td
+          {% if item.is_kyc_verified %}
+            class="table-success"
+          {% else %}
+            class="table-danger"
+          {% endif %}
+        >
+          {% if item.is_kyc_verified %}
+            Verified ✅
+          {% else %}
+            Not Verified ❌
+          {% endif %}
+        </td>
+        <td><a href="{{item.get_absolute_url}}" class="btn btn-info btn-sm">Detail</a></td>
+        <td><a href="#" class="btn btn-info btn-sm">Send Reminder</a></td>
+      </tr>
+    {% empty %}
+    <tr>
+        <td>There are pending kyc to verify!</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -1,0 +1,39 @@
+{% extends '../../backoffice_base.html' %}
+
+<!-- -->
+{% block title %}Order Action Detail{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>Order Action: {{ object.action }}</h3>
+<br />
+<div class="card">
+  <div class="card-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- Form -->
+      {{ form }}
+      <br />
+      <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<div class="card">
+  <div class="card-body">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th>Action</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ object.action }}</td>
+          <td>{{ object.description|truncatechars:80 }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

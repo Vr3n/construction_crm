@@ -1,0 +1,38 @@
+<table id="all_mobiles_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Mobile Number</th>
+      <th>Verified</th>
+      <th>Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for mobile_number in mobile_numbers %}
+      <tr>
+        <td>{{ mobile_number.user.first_name }}</td>
+        <td>{{ mobile_number.user.last_name }}</td>
+        <td>{{ mobile_number.mobile_number }}</td>
+        <td>
+        {% if mobile_number.is_verified %}
+          Verified
+        {% elif mobile_number.is_verified == False %}
+          Unverified
+        {% endif %}
+          </td>
+        <td>
+          {% if mobile_number.is_primary %}
+            Primary
+          {% else %}
+            Secondary
+          {% endif %}
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>No users have registered yet!</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

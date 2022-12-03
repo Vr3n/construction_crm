@@ -1,0 +1,46 @@
+<table id="all_users_funds" hx-target="#all_users_funds" hx-swap="outerHTML" hx-get="{% url 'backoffice_user_funds_list' %}" hx-trigger="funds_update" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>Update</th>
+      <th>Full Name</th>
+      <th>Email</th>
+      <th>Mobile Number</th>
+      <th>available_margin</th>
+      <th>used_margin</th>
+      <th>available_cash</th>
+      <th>opening_balance</th>
+      <th>pay_in</th>
+      <th>pay_out</th>
+      <th>span</th>
+      <th>delivery_margin</th>
+      <th>options_premium</th>
+      <th>updated on</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for fund in user_funds %}
+      <tr>
+        <td>
+            <a href="{{ fund.get_absolute_url }}" class="btn btn-info">Update</a>
+        </td>
+        <td>{{ fund.user.get_full_name }}</td>
+        <td>{{ fund.user.email }}</td>
+        <td>{{ fund.user.mobile_number }}</td>
+        <td>{{ fund.available_margin }}</td>
+        <td>{{ fund.used_margin }}</td>
+        <td>{{ fund.opening_balance }}</td>
+        <td>{{ fund.pay_in }}</td>
+        <td>{{ fund.pay_out }}</td>
+        <td>{{ fund.span }}</td>
+        <td>{{ fund.delivery_margin }}</td>
+        <td>{{ fund.exposure }}</td>
+        <td>{{ fund.options_premium }}</td>
+        <td>{{ fund.updated_on }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>No funds added yet!</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

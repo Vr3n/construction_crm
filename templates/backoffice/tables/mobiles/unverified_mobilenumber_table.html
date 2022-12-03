@@ -1,0 +1,22 @@
+<table id="unverified_mobile_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>User</th>
+      <th>Mobile Number</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in unverified_mobilenumbers %}
+      <tr>
+        <td>{{ item.user.get_full_name }}</td>
+        <td>{{ item.mobile_number }}</td>
+        <td><a href="#" class="btn btn-info btn-sm">Send Verification Msg</a></td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>All your user mobile numbers are verified ✅</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

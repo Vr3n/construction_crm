@@ -1,0 +1,58 @@
+{% extends 'backoffice_base.html' %}
+
+<!-- -->
+{% block title %}{{ object.user.first_name }} - funds{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>{{ object.user.get_full_name }} - Funds 💰</h3>
+<br />
+<div class="card">
+  <div class="card-body">
+    {% include 'backoffice/forms/users/fund_form.html' %}
+  </div>
+</div>
+<hr />
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id="user_fund" class="table table-bordered table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>available_margin</th>
+            <th>used_margin</th>
+            <th>available_cash</th>
+            <th>opening_balance</th>
+            <th>pay_in</th>
+            <th>pay_out</th>
+            <th>span</th>
+            <th>delivery_margin</th>
+            <th>options_premium</th>
+            <th>updated on</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ object.user.get_full_name }}</td>
+            <td>{{ object.user.email }}</td>
+            <td>{{ object.user.mobile_number }}</td>
+            <td>{{ object.available_margin }}</td>
+            <td>{{ object.used_margin }}</td>
+            <td>{{ object.opening_balance }}</td>
+            <td>{{ object.pay_in }}</td>
+            <td>{{ object.pay_out }}</td>
+            <td>{{ object.span }}</td>
+            <td>{{ object.delivery_margin }}</td>
+            <td>{{ object.exposure }}</td>
+            <td>{{ object.options_premium }}</td>
+            <td>{{ object.updated_on }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

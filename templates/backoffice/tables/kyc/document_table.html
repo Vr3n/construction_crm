@@ -1,0 +1,18 @@
+<table id="all_documents_table" class="table table-bordered table-sm">
+  <thead class="thead-dark">
+    <tr>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for doc in documents %}
+      <tr>
+        <td>{{ doc.name }}</td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td>No document created yet!</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

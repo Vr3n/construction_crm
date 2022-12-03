@@ -1,0 +1,15 @@
+<form action="{% url 'hx_backoffice_user_kyc_form' object.id %}" method="post">
+	{% csrf_token %}
+	<input type="hidden" name="user" value="{{object.user.id}}">
+	<div class="form-group row">
+	    <label class="col-4">Approve Kyc</label> 
+	    <div class="col-8">
+	      <div class="custom-control custom-checkbox custom-control-inline">
+	        <input name="is_kyc_verified" id="checkbox_0" type="checkbox" class="custom-control-input" aria-describedby="checkboxHelpBlock" {% if object.is_kyc_verified %}checked{% endif %} > 
+	        <label for="checkbox_0" class="custom-control-label"></label>
+	      </div> 
+	      <span id="checkboxHelpBlock" class="form-text text-muted">Check to approve kyc of user</span>
+	    </div>
+	  </div> 
+	<button class="btn btn-success">Submit</button>
+</form>

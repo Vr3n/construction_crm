@@ -1,0 +1,54 @@
+{% extends 'backoffice_base.html' %}
+
+<!-- -->
+{% block title %}{{ object.user.first_name }} - Bank{% endblock title %}
+
+<!-- -->
+{% block content %}
+<h3>{{ object.user.get_full_name }} - Bank ({{ object.bank_name }}) 💰</h3>
+<br />
+<div class="card">
+  <div class="card-body">
+    <form action="" method="post">
+      {% csrf_token %}
+      <!-- Form -->
+      {{ form }}
+      <br />
+      <button class="btn btn-success" type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+<hr />
+<div class="card">
+  <div class="card-body">
+    <div class="table-responsive">
+      <table id="all_users_funds" class="table table-bordered table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Mobile Number</th>
+            <th>Bank Name</th>
+            <th>Account No</th>
+            <th>IFSC code</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ object.user.get_full_name }}</td>
+            <td>{{ object.user.email }}</td>
+            <td>{{ object.user.mobile_number }}</td>
+            <td>{{ object.bank_name }}</td>
+            <td>{{ object.account_number }}</td>
+            <td>{{ object.ifsc_code }}</td>
+            <td>{{ object.created_at }}</td>
+            <td>{{ object.updated_at }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock content %}

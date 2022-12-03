@@ -1,0 +1,103 @@
+{% load custom_tags %}
+{% load static %}
+{% load i18n %}
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-brand" style="font-size: 20px">
+      Crown CRM
+    </a>
+    <div class="sidebar-toggler not-active">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+  <div class="sidebar-body">
+    <ul class="nav">
+      <li class="nav-item nav-category">Main</li>
+      <li class="nav-item {% active request 'home' %}">
+        <a href="{% url 'home' %}" class="nav-link">
+          <i class="link-icon" data-feather="home"></i>
+          <span class="link-title">Home</span>
+        </a>
+      </li>
+      <li class="nav-item nav-category">Leads Section</li>
+      <li class="nav-item {% active request 'leads_form' %}">
+        <a href="{% url 'leads_form' %}" class="nav-link">
+          <i class="link-icon" data-feather="shopping-bag"></i>
+          <span class="link-title">Leads</span>
+        </a>
+      </li>
+      <li class="nav-item {% active request 'backoffice_ordertype' %}">
+        <a href="{% url 'backoffice_ordertype' %}" class="nav-link">
+          <i class="link-icon" data-feather="list"></i>
+          <span class="link-title">Assigned Leads</span>
+        </a>
+      </li>
+      <li class="nav-item nav-category">Users Section</li>
+      <li class="nav-item {% active request 'backoffice_users' %}">
+        <a href="{% url 'backoffice_users' %}" class="nav-link">
+          <i class="link-icon" data-feather="users"></i>
+          <span class="link-title">Users</span>
+        </a>
+      </li>
+      <li class="nav-item {% active request 'backoffice_user_emails' %}">
+        <a href="{% url 'backoffice_user_emails' %}" class="nav-link">
+          <i class="link-icon" data-feather="mail"></i>
+          <span class="link-title">Emails</span>
+        </a>
+      </li>
+      <li class="nav-item {% active request 'backoffice_user_mobiles' %}">
+        <a href="{% url 'backoffice_user_mobiles' %}" class="nav-link">
+          <i class="link-icon" data-feather="phone"></i>
+          <span class="link-title">Mobile Numbers</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- <nav class="settings-sidebar">
+  <div class="sidebar-body">
+    <a href="#" class="settings-sidebar-toggler">
+      <i data-feather="settings"></i>
+    </a>
+    <h6 class="text-muted">Sidebar:</h6>
+    <div class="form-group border-bottom">
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="sidebarThemeSettings"
+            id="sidebarLight"
+            value="sidebar-light"
+            checked
+          />
+          Light
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input
+            type="radio"
+            class="form-check-input"
+            name="sidebarThemeSettings"
+            id="sidebarDark"
+            value="sidebar-dark"
+          />
+          Dark
+        </label>
+      </div>
+    </div>
+    <div class="theme-wrapper">
+      <h6 class="text-muted mb-2">Light Theme:</h6>
+      <a class="theme-item active" href="demo_1/dashboard-one.html">
+        <img src="assets/images/screenshots/light.jpg" alt="light theme" />
+      </a>
+      <h6 class="text-muted mb-2">Dark Theme:</h6>
+      <a class="theme-item" href="demo_2/dashboard-one.html">
+        <img src="assets/images/screenshots/dark.jpg" alt="light theme" />
+      </a>
+    </div>
+  </div>
+</nav> -->

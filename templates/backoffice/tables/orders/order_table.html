@@ -1,0 +1,49 @@
+{% include 'notifications.html' %}
+<table
+  id="leadDataTable"
+  class="table table-bordered table-hover table-sm"
+  hx-get="{% url 'backoffice_order_list' %}"
+  hx-trigger="lead_update"
+  hx-target="#leadDataTable_wrapper"
+  hx-swap="outerHTML"
+  _='on htmx:afterSettle $("#leadDataTable").DataTable()'
+>
+  <thead class="thead-dark">
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Mobile Number</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for lead in lead_data %}
+    <tr>
+      <td>{{ lead.first_name }}</td>
+      <td>{{ lead.last_name }}</td>
+      <td>{{ lead.email }}</td>
+      <td>{{ lead.mobile_number }}</td>
+      <td>{{ lead.created_at }}</td>
+      <td>{{ lead.updated_at }}</td>
+      <td>
+        <a href="{{ lead.get_absolute_url }}" class="btn btn-info">Update</a>
+      </td>
+      <td>
+        <a
+          hx-post="{{ lead.get_delete_url }}"
+          hx-trigger="confirmed"
+          _="on click call Swal.fire({ title: 'Delete {{ lead.id }}', text: 'Are you sure you want to delete order?', icon: 'warning',showCancelButton: true, confirmButtonText: 'Delete' }) if result.isConfirmed trigger confirmed"
+          hx-target="#leadDataTable"
+          hx-swap="outerHTML"
+          class="btn btn-danger"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
